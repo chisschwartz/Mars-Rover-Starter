@@ -10,12 +10,15 @@ describe("Message class", function() {
     });
 
     it("constructor sets name", function() {
-        (new Message(this.name === this.name));
+       const trueName = new Message("test message with two commands");
+       const result = trueName.Message;
+       expect(result).toBe(Message[0]);
     });
 
     it("contains a commands array passed into the constructor as the 2nd argument", function(){
-        //new Message (this.commands === new Command[this.commandType && this.value]);
-        (new Message(this.commands === this.commands));
+        const trueCommands = new Message("test message with two commands", this.commands);
+        const result = trueCommands.Message
+        expect(result).toBe(Message[1]);
     });
 
 });

@@ -10,39 +10,102 @@ describe("Rover class", function() {
 
   //7.
   it("constructor sets position and default values for mode and generatorWatts", function() {
-  expect( function(){ new Rover(this.position === position && this.mode === "NORMAL" && this.generatorWatts === 110 )});
-})
+  const truePosition = new Rover(7);
+  const trueMode = "NORMAL";
+  const watts = 110;
+  const result = (truePosition.Rover, trueMode.mode, watts.generatorWatts);
+  expect(result).toBe((Rover , this.mode , this.generatorWatts));
+});
 //8
 it ("response returned by recieveMessage contains the name of the message", function() {
-  expect (function() {receiveMessage(this.message = new Message(this.name === this.name))});
-})
+  const messageName = new Message("same name");
+  const result = messageName.Message;
+  expect(result).toBe(Message[0]);
+});
 //9
 it ("response returned by recieveMessage includes two results if two commmands are sent in the message", function() {
-  expect (function() { (receiveMessage(this.commands = new Command() && this.commands.length >= 2))});
-})
+  const twoRover = new Rover(9);
+  const commandMessage = new Message("two commands" , [new Command("MODE_CHANGE" , "LOW POWER") , new Command ("STATUS_CHECK")]);
+  const result = twoRover.receiveMessage(commandMessage);
+  console.log(result.results);
+  expect(result.results.length).toEqual(2);
+});
 //10
 it ("responds correctly to the status check command", function() {
-  if (new Command (this.commands = "STATUS_CHECK")) {
-    rover = Rover;
-  }
-})
+  const testMessage = new Message("test message", [new Command("STATUS_CHECK")])
+  const status = new Rover(10);
+  const result = status.receiveMessage(testMessage);
+  expect(result).toStrictEqual(
+    (response = {
+      message: testMessage.name,
+      results: [
+        {
+          completed: true,
+          roverStatus: {
+            mode: status.mode,
+            generatorWatts: status.generatorWatts,
+            position: status.position,
+          },
+        },
+      ],
+    })
+  );
+});
 //11
 it ("responds correctly to the mode change command", function() {
-  if ( new Command(this.commandType = "MODE_CHANGE")) {
-    this.value === this.mode;
-    completed = true;
-  }
-})
+  const modeMessage = new Message("mode change command" , [new Command("MODE_CHANGE" , "LOW_POWER")]);
+  const modeStatus = new Rover(11);
+  const result = modeStatus.receiveMessage(modeMessage);
+  expect(result).toStrictEqual(
+    (response = {
+      message: modeMessage.name,
+      results: [
+        {
+          completed: true,
+          roverStatus: {
+            mode: modeStatus.mode,
+          },
+        },
+      ],
+    })
+  );
+});
 //12
 it ("responds with a false completed value when attempting to move in LOW_POWER mode", function() {
-  expect (function() {Rover.mode = "LOW_POWER" && new Command(this.commandType === "MOVE");})
-  //.toThrow(new Error(completed = false));
-  completed = false;
-})
+  const newMode = new Rover(12);
+  newMode.mode = "LOW_POWER";
+  const noMovement = new Message("no move" , [new Command("MOVE" , 4321)]);
+  const result = newMode.receiveMessage(noMovement);
+  expect(result).toStrictEqual(
+    (response = {
+      message: noMovement.name,
+      results: [
+        {
+          completed: false,
+        },
+      ],
+    })
+  );
+});
 //13
-it ("constructor sets a value passed in as the 2nd argument", function() {
-  (new Rover(this.value = this.value))
-})
+it ("responds with the position for the move command", function() {
+  const oldPos = new Rover(13);
+  const movement = new Message ('Test move' , [new Command ("MOVE" , 4321)]);
+  let result = oldPos.receiveMessage(movement);
+  expect(result).toStrictEqual(
+    (response = {
+      message: movement.name,
+      results: [
+        {
+          completed: true,
+          roverStatus: {
+            position: oldPos.position,
+          },
+        },
+      ],
+    })
+  );
+});
   // 7 tests here!
 
 });

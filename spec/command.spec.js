@@ -10,10 +10,14 @@ describe("Command class", function() {
   });
   
   it("constructor sets command type", function() {
-    (new Command(this.commandType === this.commandType));
+    const type = new Command("MODE_CHANGE");
+    const result = type.Command;
+    expect(result).toBe(Command[0]);
   });
 
   it("constructor sets a value passed in as the 2nd argument", function() {
-    (new Command(this.value === this.value));
+    const trueValue = new Command("MODE_CHANGE" , "LOW_POWER");
+    const result = trueValue.Command;
+    expect(result).toBe(Command[1]);
   });
 });
